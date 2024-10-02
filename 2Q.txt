@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get User Names</title>
+</head>
+<body>
+    <button id="getUserNames">Get user names</button>
+    <ul id="userList"></ul>
+
+    <script>
+        document.getElementById('getUserNames').addEventListener('click', function() {
+            // Create a new XMLHttpRequest object
+            var xhr = new XMLHttpRequest();
+
+            // Configure it: GET-request for the URL
+            xhr.open('GET', 'https://jsonplaceholder.typicode.com/users', true);
+
+            // Send the request over the network
+            xhr.send();
+
+            // This will be called after the response is received
+            xhr.onload = function() {
+                if (xhr.status != 200) { // analyze HTTP response status
+                
+                } else {
+                    // Parse the JSON response
+                    let users = JSON.parse(xhr.response);
+
+                    // Log the entire user objects array to the console
+                    console.log(users);
+
+                    // Display only the names on the webpage
+                    let userList = document.getElementById('userList');
+                    userList.innerHTML = ''; // Clear previous list
+                    users.forEach(user => {
+                        let li = document.createElement('li');
+                        li.textContent = user.name;
+                        userList.appendChild(li);
+                    });
+                }
+            };
+
+            xhr.onerror = function() {
+                console.error("Request failed");
+            };
+        });
+    </script>
+</body>
+</html>

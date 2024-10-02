@@ -1,0 +1,44 @@
+XMLHttpRequest Object:
+The XMLHttpRequest object is a built-in browser object in JavaScript that allows for communication between a client and a server without having to reload the entire web page. This is a key part of implementing AJAX (Asynchronous JavaScript and XML) functionality, which enables updating parts of a web page without a full page refresh.
+
+Key Properties and Methods of XMLHttpRequest:
+Properties:
+readyState: Represents the state of the request. It goes through five different states (0 to 4), with 4 meaning the request is complete.
+status: The HTTP response status code (e.g., 200 for success).
+responseText: The response from the server as a string.
+responseXML: The response from the server parsed as an XML document (if applicable).
+Methods:
+open(method, url, async): Initializes a request. method is usually "GET" or "POST", url is the destination, and async indicates whether the request is asynchronous (true by default).
+send(): Sends the request to the server.
+setRequestHeader(): Sets the value of an HTTP request header.
+How XMLHttpRequest is used in AJAX:
+AJAX allows sending requests to a server and processing the response asynchronously without reloading the web page. Here’s how you can use XMLHttpRequest to perform AJAX operations:
+Create XMLHttpRequest object: const xhr = new XMLHttpRequest(); creates a new instance of the object.
+Define the callback: The onreadystatechange function checks when readyState is 4 (request complete) and status is 200 (successful response). If so, the response is processed.
+Send the request: The open() method initializes the request with "GET" and a URL, and send() sends the request to the server.
+Asynchronous response handling: Once the server response is ready, it can be processed without reloading the entire page.
+AJAX Workflow Using XMLHttpRequest:
+The client-side JavaScript makes a request to a server using XMLHttpRequest.
+The server processes the request and sends back a response.
+The response is processed in the browser, allowing parts of the webpage to be updated without reloading.
+
+PROGRAM:
+
+// Create a new instance of XMLHttpRequest
+const xhr = new XMLHttpRequest();
+
+// Set up a callback function to handle the response when the request is complete
+xhr.onreadystatechange = function () {
+  if (xhr.readyState === 4 && xhr.status === 200) {
+    // Request finished and response is ready
+    console.log("Response from server:", xhr.responseText);
+    // You can update the webpage here based on the response, e.g., insert the response text into an HTML element
+    document.getElementById("result").innerHTML = xhr.responseText;
+  }
+};
+
+// Initialize a GET request to the server
+xhr.open("GET", "https://api.example.com/data", true);
+
+// Send the request
+xhr.send();

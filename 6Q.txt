@@ -1,0 +1,65 @@
+Key Points:
+localStorage and sessionStorage are Browser APIs used for client-side storage.
+localStorage persists data across browser sessions (even after closing the browser).
+sessionStorage stores data only for the current session (cleared when the tab or browser is closed).
+Both store data in key-value pairs and can store up to 5-10MB of data.
+1. localStorage
+Purpose: The localStorage API allows developers to store data in the browser that persists even after the browser is closed. This is useful for data that should remain available for future visits, such as user preferences, settings, or saved application states.
+Characteristics:
+Stores data indefinitely until it is manually cleared by the user or programmatically.
+Data is stored as key-value pairs, and values must be strings (objects can be stored by converting them to JSON).
+Has a storage limit of around 5-10MB, depending on the browser.
+Usage Example:
+
+// Storing data in localStorage
+localStorage.setItem('username', 'Alice');
+
+// Retrieving data from localStorage
+const username = localStorage.getItem('username');
+console.log(username); // Output: 'Alice'
+
+// Storing an object in localStorage (using JSON)
+const user = { name: 'Alice', age: 30 };
+localStorage.setItem('user', JSON.stringify(user));
+
+// Retrieving and parsing the object
+const storedUser = JSON.parse(localStorage.getItem('user'));
+console.log(storedUser.name); // Output: 'Alice'
+
+// Removing a specific item
+localStorage.removeItem('username');
+
+// Clearing all localStorage data
+localStorage.clear();
+
+
+2. sessionStorage
+Purpose: The sessionStorage API is used to store data that is only available for the current browser session. It is cleared automatically when the page session ends (i.e., when the tab or window is closed).
+Characteristics:
+Stores data temporarily for the duration of the session.
+Like localStorage, it uses key-value pairs and stores data as strings.
+Useful for data that should not persist beyond the current session, such as session-specific settings or form data.
+Has a similar storage limit (5-10MB) to localStorage.
+Usage Example:
+
+// Storing data in sessionStorage
+sessionStorage.setItem('sessionId', '12345');
+
+// Retrieving data from sessionStorage
+const sessionId = sessionStorage.getItem('sessionId');
+console.log(sessionId); // Output: '12345'
+
+// Storing a temporary object in sessionStorage (using JSON)
+const tempUser = { name: 'Bob', age: 25 };
+sessionStorage.setItem('tempUser', JSON.stringify(tempUser));
+
+// Retrieving and parsing the object
+const storedTempUser = JSON.parse(sessionStorage.getItem('tempUser'));
+console.log(storedTempUser.name); // Output: 'Bob'
+
+// Removing a specific item
+sessionStorage.removeItem('sessionId');
+
+// Clearing all sessionStorage data
+sessionStorage.clear();
+
